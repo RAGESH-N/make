@@ -1,0 +1,39 @@
+.bg-wrapper {
+  background-image: url('/assets/Restaurent_sign-up.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 1000px;
+  width: 100%;
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: #dc3545;
+  background-color: #fff0f0;
+}
+
+.captcha-box {
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 16px;
+  background: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}

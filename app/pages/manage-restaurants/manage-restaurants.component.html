@@ -1,0 +1,38 @@
+
+<div class="container mt-5 manage-restaurant-container">
+  <h2 class="text-center mb-4 text-danger">Manage Restaurants</h2>
+
+  <!-- View Restaurant Button -->
+  <div class="text-end mb-4">
+    <button class="btn btn-outline-danger" (click)="navigateToViewRestaurant()">View All Restaurants</button>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-6 col-lg-4" *ngFor="let restaurant of pendingRestaurants">
+      <div class="card h-100 shadow-sm">
+        <img [src]="restaurant.imageUrl || 'https://source.unsplash.com/300x200/?restaurant,food'"
+             class="card-img-top restaurant-img"
+             alt="Restaurant Image" />
+
+        <div class="card-body">
+          <h5 class="card-title text-primary">{{ restaurant.restaurantName }}</h5>
+          <p class="card-text">
+            <strong>Owner:</strong> {{ restaurant.shopOwnerName }}<br />
+            <strong>Address:</strong> {{ restaurant.shopAddress }}<br />
+            <strong>City:</strong> {{ restaurant.city }}<br />
+            <strong>FSSAI:</strong> {{ restaurant.fssaiCode }}<br />
+            <strong>Aadhar:</strong> {{ restaurant.aadharNumber }}<br />
+            <strong>Phone:</strong> {{ restaurant.phoneNumber }}<br />
+            <strong>Email:</strong> {{ restaurant.mailId }}<br />
+            <strong>Bank:</strong> {{ restaurant.bankAccountNumber }}<br />
+            <strong>Location:</strong> {{ restaurant.geoLocation }}
+          </p>
+        </div>
+        <div class="card-footer bg-white text-center">
+          <button class="btn btn-success btn-sm me-2" (click)="approveRestaurant(restaurant._id)">Approve</button>
+          <button class="btn btn-danger btn-sm" (click)="rejectRestaurant(restaurant._id)">Reject</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

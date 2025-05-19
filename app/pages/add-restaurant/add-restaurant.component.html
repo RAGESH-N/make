@@ -1,0 +1,110 @@
+<div class="bg-wrapper">
+  <div class="overlay">
+    <div class="container p-4">
+      <form (ngSubmit)="addRestaurant()" #restaurantForm="ngForm" class="bg-white rounded p-4 shadow-lg">
+        <h2 class="text-danger text-center mb-4"> <i class="fa-solid fa-cutlery"></i> Add Restaurant</h2>
+        <div class="row g-3">
+          <!-- Restaurant Name -->
+          <div class="col-md-6">
+            <label class="form-label">Restaurant Name</label>
+            <input type="text" class="form-control" [(ngModel)]="restaurant.restaurantName" name="restaurantName" required minlength="3" #restaurantName="ngModel" />
+            <div *ngIf="restaurantName.invalid && restaurantName.touched" class="text-danger">At least 3 characters.</div>
+          </div>
+
+          <!-- Shop Owner Name -->
+          <div class="col-md-6">
+            <label class="form-label">Shop Owner Name</label>
+            <input type="text" class="form-control" [(ngModel)]="restaurant.shopOwnerName" name="shopOwnerName" required minlength="3" #shopOwnerName="ngModel" />
+            <div *ngIf="shopOwnerName.invalid && shopOwnerName.touched" class="text-danger">At least 3 characters.</div>
+          </div>
+
+          <!-- Shop Address -->
+          <div class="col-md-12">
+            <label class="form-label">Shop Address</label>
+            <textarea class="form-control" [(ngModel)]="restaurant.shopAddress" name="shopAddress" required minlength="7" #shopAddress="ngModel"></textarea>
+            <div *ngIf="shopAddress.invalid && shopAddress.touched" class="text-danger">At least 7 characters.</div>
+          </div>
+
+          <!-- FSSAI Code -->
+          <div class="col-md-6">
+            <label class="form-label">FSSAI Code</label>
+            <input type="text" class="form-control" [(ngModel)]="restaurant.fssaiCode" name="fssaiCode" required pattern="^\d{14}$" #fssaiCode="ngModel" />
+            <div *ngIf="fssaiCode.invalid && fssaiCode.touched" class="text-danger">Exactly 14 digits.</div>
+          </div>
+
+          <!-- Aadhar Number -->
+          <div class="col-md-6">
+            <label class="form-label">Aadhar Number</label>
+            <input type="text" class="form-control" [(ngModel)]="restaurant.aadharNumber" name="aadharNumber" required pattern="^\d{12}$" #aadharNumber="ngModel" />
+            <div *ngIf="aadharNumber.invalid && aadharNumber.touched" class="text-danger">Exactly 12 digits.</div>
+          </div>
+
+          <!-- Phone Number -->
+          <div class="col-md-6">
+            <label class="form-label">Phone Number</label>
+            <input type="text" class="form-control" [(ngModel)]="restaurant.phoneNumber" name="phoneNumber" required pattern="^[789]\d{9}$" #phoneNumber="ngModel" />
+            <div *ngIf="phoneNumber.invalid && phoneNumber.touched" class="text-danger">Starts with 7/8/9, 10 digits.</div>
+          </div>
+
+          <!-- Bank Account Number -->
+          <div class="col-md-6">
+            <label class="form-label">Bank Account Number</label>
+            <input type="text" class="form-control" [(ngModel)]="restaurant.bankAccountNumber" name="bankAccountNumber" required pattern="^\d{12}$" #bankAccountNumber="ngModel" />
+            <div *ngIf="bankAccountNumber.invalid && bankAccountNumber.touched" class="text-danger">Exactly 12 digits.</div>
+          </div>
+
+          <!-- Email -->
+          <div class="col-md-6">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" [(ngModel)]="restaurant.mailId" name="mailId" required pattern="^[a-zA-Z0-9._%+-]+@(gmail|yahoo)\.com$" #mailId="ngModel" />
+            <div *ngIf="mailId.invalid && mailId.touched" class="text-danger">Use Gmail or Yahoo.</div>
+          </div>
+
+          <!-- Password -->
+          <div class="col-md-6">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" [(ngModel)]="restaurant.password" name="password" required #password="ngModel" />
+            <div *ngIf="password.touched && !isPasswordValid()" class="text-danger">Min 8 chars, include upper, lower, digit, special.</div>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="col-md-6">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" [(ngModel)]="confirmPassword" name="confirmPassword" required />
+            <div *ngIf="confirmPassword !== restaurant.password && confirmPassword.length > 0" class="text-danger">Passwords do not match.</div>
+          </div>
+
+          <!-- City -->
+          <div class="col-md-6">
+            <label class="form-label">City</label>
+            <input type="text" class="form-control" [(ngModel)]="restaurant.city" name="city" required #city="ngModel" />
+            <div *ngIf="city.invalid && city.touched" class="text-danger">City is required.</div>
+          </div>
+
+          <!-- Geo Location -->
+          <div class="col-md-6">
+            <label class="form-label">Geo Location</label>
+            <input type="text" class="form-control" [(ngModel)]="restaurant.geoLocation" name="geoLocation" required placeholder="e.g., 12.9716,77.5946" #geoLocation="ngModel" />
+            <div *ngIf="geoLocation.invalid && geoLocation.touched" class="text-danger">Format: lat,long</div>
+          </div>
+
+          <!-- Captcha -->
+          <div class="col-md-12">
+            <label class="form-label">Captcha</label>
+            <div class="d-flex align-items-center gap-2">
+              <input type="text" class="form-control w-50" [(ngModel)]="userCaptcha" name="captcha" required />
+              <span class="captcha-box px-3 py-1">{{ captcha }}</span>
+              <button type="button" class="btn btn-outline-secondary" (click)="generateCaptcha()">↻</button>
+            </div>
+            <div *ngIf="userCaptcha !== captcha && userCaptcha.length > 0" class="text-danger mt-1">Invalid Captcha.</div>
+          </div>
+
+          <!-- Submit -->
+          <div class="col-md-12 text-center">
+            <button type="submit" class="btn btn-danger mt-3 w-100" [disabled]="restaurantForm.invalid || !isPasswordValid()"><i class="fa-solid fa-plus"> </i> Add Restaurant</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
